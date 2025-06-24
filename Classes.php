@@ -10,5 +10,5 @@ class Name {
 }
 
 $object1 = new Name();
-$object1->displayName("mariya");
+$object1-> displayName("mariya");
 ?>

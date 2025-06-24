@@ -10,7 +10,7 @@
         
     }
 
-    //creating child class$brand
+    //creating child class
     class Car extends Vehicle {
         public function startEngine()
         {

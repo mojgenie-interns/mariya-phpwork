@@ -122,7 +122,7 @@
         $ques = readline(" 1.Book   2.DVD \n");
         $ques2 = readline("1.Borrow  2.Return \n");
 
-        if ($ques==1 && $ques2==1){
+        if ($ques == 1 && $ques2 == 1){
 
             $book->borrowItem();
             $book->getDetails();

@@ -5,7 +5,7 @@
     abstract class LibraryItem
     {
         public $title, $author;
-        public static $count;
+        
     
         
         // constuctor
@@ -13,7 +13,7 @@
         {
             $this->title = $title;
             $this->author = $author;
-            self::$count++;
+        
         }
         abstract function getDetails();
 
@@ -119,14 +119,24 @@
         $dvd = new DVD($type,$name);
         
         
-        $ques = readline("type 1. for borrow    2.for return \n");
+        $ques = readline(" 1.Book   2.DVD \n");
+        $ques2 = readline("1.Borrow  2.Return \n");
 
-        if ($ques==1){
+        if ($ques==1 && $ques2==1){
 
             $book->borrowItem();
             $book->getDetails();
         }
 
+        elseif($ques == 1 && $ques2 == 2){
+            $book->returnItem();
+            $book->getDetails();
+        }
+        
+        elseif($ques == 2 && $ques2 == 1){
+            $dvd->borrowItem();
+            $dvd->getDetails();
+        }
         else {
             $dvd->returnItem();
             $dvd->getDetails();

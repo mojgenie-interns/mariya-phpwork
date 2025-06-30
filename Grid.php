@@ -128,8 +128,10 @@
 
             echo "\nMagic Square :\n";
             for ($i = 0; $i < $size; $i++) {
+                 //echo "--------";
                 for ($j = 0; $j < $size; $j++) {
                     echo ($data[$i][$j]." ");
+                    //echo "--------";
                 }
                 echo "\n";
             }

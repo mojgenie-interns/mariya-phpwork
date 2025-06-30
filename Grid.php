@@ -1,83 +1,85 @@
 <?php
 
+interface GridDisplayInterface {
+    public function gridDisplay(CircularGrid $grid): void;
+}
 
-    interface GridDisplayInterface {
-        public function gridDisplay(CircularGrid $grid): void;
+class CircularGrid {
+    public $currentRow;
+    public $currentCol;
+    public $size;
+    public $data;
+
+    public function __construct($size) {
+        $this->currentRow = 0;
+        $this->currentCol = 0;
+        $this->size = $size;
+        $this->data = array_fill(0, $size, array_fill(0, $size, 0));
     }
 
-    
-    class CircularGrid {
-        public $currentRow;
-        public $currentCol;
-        public $size;
-        public $data;
-
-        public function __construct($size) {
-            $this->currentRow = 0;
-            $this->currentCol = 0;
-            $this->size = $size;
-            $this->data = array_fill(0, $size, array_fill(0, $size, 0));
-        }
-
-        public function moveUpRight() {
-            $this->currentRow = ($this->currentRow - 1 + $this->size) % $this->size;
-            $this->currentCol = ($this->currentCol + 1) % $this->size;
-        }
-
-        public function moveDown() {
-            $this->currentRow = ($this->currentRow + 1) % $this->size;
-        }
-
-        public function set($row, $col, $value) {
-            $this->data[$row][$col] = $value;
-        }
-
-        public function get($row, $col) {
-            return $this->data[$row][$col];
-        }
-
-        public function getSize() {
-            return $this->size;
-        }
-
-        public function getData() {
-            return $this->data;
-        }
+    public function moveUpRight() {
+        $this->currentRow = ($this->currentRow - 1 + $this->size) % $this->size;
+        $this->currentCol = ($this->currentCol + 1) % $this->size;
     }
 
-    
-    class MagicSquare {
-        public $grid;
-        public $size;
-        public $magicConstant;
+    public function moveDownFrom($row, $col) {
+        $this->currentRow = ($row + 1) % $this->size;
+        $this->currentCol = $col;
+    }
 
-        public function __construct($n) {
-            $this->size = $n;
-            $this->grid = new CircularGrid($n);
-            $this->magicConstant = ($n * ($n * $n + 1)) / 2;
-        }
+    public function set($row, $col, $value) {
+        $this->data[$row][$col] = $value;
+    }
 
-        public function generate() {
-            $n = $this->size;
-            $i = 0;
-           $j = floor($n / 2); 
+    public function get($row, $col) {
+        return $this->data[$row][$col];
+    }
 
-            for ($num = 1; $num <= $n * $n; $num++) {
-                $this->grid->set($i, $j, $num);
+    public function getSize() {
+        return $this->size;
+    }
 
-                $nextI = ($i - 1 + $n) % $n;
-                $nextJ = ($j + 1) % $n;
+    public function getData() {
+        return $this->data;
+    }
+}
 
-                if ($this->grid->get($nextI, $nextJ) != 0) {
-                    $i = ($i + 1) % $n;
-                } else {
-                    $i = $nextI;
-                    $j = $nextJ;
-                }
+class MagicSquare {
+    public $grid;
+    public $size;
+    public $magicConstant;
+
+    public function __construct($n) {
+        $this->size = $n;
+        $this->grid = new CircularGrid($n);
+        $this->magicConstant = ($n * ($n * $n + 1)) / 2;
+    }
+
+    public function generate() {
+        $n = $this->size;
+        $this->grid->currentRow = 0;
+        $this->grid->currentCol = floor($n / 2);
+
+        for ($num = 1; $num <= $n * $n; $num++) {
+            $i = $this->grid->currentRow;
+            $j = $this->grid->currentCol;
+
+            $this->grid->set($i, $j, $num);
+
+            
+            $this->grid->moveUpRight();
+
+            $nextI = $this->grid->currentRow;
+            $nextJ = $this->grid->currentCol;
+
+            if ($this->grid->get($nextI, $nextJ) != 0) {
+                
+                $this->grid->moveDownFrom($i, $j);
             }
         }
+    }
 
-        public function isMagic() {
+    public function isMagic() {
         $n = $this->size;
         $data = $this->grid->getData();
         $expected = $this->magicConstant;
@@ -113,40 +115,29 @@
         return true;
     }
 }
-    
 
+class ConsoleDisplay implements GridDisplayInterface {
+    public function gridDisplay(CircularGrid $grid): void {
+        $size = $grid->getSize();
+        $data = $grid->getData();
 
-    class ConsoleDisplay implements GridDisplayInterface {
-
-        public function gridDisplay(CircularGrid $grid): void {
-
-            $size = $grid->getSize();//this $grid is a instance of circularGrid
-
-            $data = $grid->getData();
-
-            echo "Magic Constant: " . (($size * ($size * $size + 1)) / 2) . "\n";
-
-            echo "\nMagic Square :\n";
-            for ($i = 0; $i < $size; $i++) {
-                 
-                for ($j = 0; $j < $size; $j++) {
-                    echo "|";
-                    echo ($data[$i][$j]." ");
-                    //echo " |";
-                }
-                echo "\n";
+        echo "Magic Constant: " . (($size * ($size * $size + 1)) / 2) . "\n\n";
+        echo "Magic Square:\n";
+        for ($i = 0; $i < $size; $i++) {
+            for ($j = 0; $j < $size; $j++) {
+                echo ($data[$i][$j]. "   " );
             }
-            
+            echo "\n";
         }
     }
+}
 
 
 
-        $n = readline("Enter an odd number for the size of the square : ");
+$n = readline("Enter an odd number for the size of the square: ");
 
-        $magicSquare = new MagicSquare($n);
-        $magicSquare->generate();
+$magicSquare = new MagicSquare($n);
+$magicSquare->generate();
 
-        $display = new ConsoleDisplay();
-        $display->gridDisplay($magicSquare->grid);
-?>
+$display = new ConsoleDisplay();
+$display->gridDisplay($magicSquare->grid);

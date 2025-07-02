@@ -12,6 +12,7 @@
     {
         "task": "BUY A BOOK",
         "date": "2025-07-02",
-        "target": "2002-07-11"
+        "target": "2002-07-11",
+        "status": "completed"
     }
 ]

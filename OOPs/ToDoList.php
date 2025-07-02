@@ -15,7 +15,11 @@ trait Tasks {
 
         echo "Your existing Tasks:\n";
         foreach ($tasks as $index => $task) {
-            echo ($index + 1) . ". " . $task['task'] . " (Created: " . $task['date'] . ", Target: " . $task['target'] . ")\n";
+            $status = $task['status'] ?? 'not completed';
+            echo ($index + 1) . ". " . $task['task'] . 
+                " (Created: " . $task['date'] . 
+                ", Target: " . $task['target'] . 
+                ", Status: " . $status . ")\n";
         }
     }
 }
@@ -45,7 +49,8 @@ class NewToDo implements ForToDo {
         $newTask = [
             "task" => $name,
             "date" => date("Y-m-d"),
-            "target" => $target
+            "target" => $target,
+            "status" => "not completed"
         ];
 
         $this->tasks[] = $newTask;
@@ -109,7 +114,28 @@ class NewToDo implements ForToDo {
 
         file_put_contents($this->file, json_encode($this->tasks, JSON_PRETTY_PRINT));
         echo "Task updated successfully.\n";
-       
+    }
+
+    public function markCompleted() {
+        if (empty($this->tasks)) {
+            echo "No tasks available.\n";
+            return;
+        }
+
+        $this->displayToDo($this->tasks);
+        $index = readline("Enter the task number to change status: ");
+        $index = (int)$index - 1;
+
+        if (!isset($this->tasks[$index])) {
+            echo "Invalid task number.\n";
+            return;
+        }
+
+        $current = $this->tasks[$index]['status'];
+        $this->tasks[$index]['status'] = ($current === "completed") ? "not completed" : "completed";
+
+        file_put_contents($this->file, json_encode($this->tasks, JSON_PRETTY_PRINT));
+        echo "Task status updated to: " . $this->tasks[$index]['status'] . "\n";
     }
 
     public function viewToDo() {
@@ -122,34 +148,29 @@ $object = new NewToDo();
 
 echo "~~~ WELCOME TO YOUR TO-DO LIST ~~~\n";
 echo "---------------------------------\n";
-//echo "Current To-Do Items:\n";
 $object->viewToDo();
 echo "---------------------------------\n";
 echo "--------MENU-----------\n";
 echo "\n1. CREATE A TO-DO ITEM\n";
 echo "2. DELETE A TO-DO ITEM\n";
 echo "3. UPDATE A TO-DO ITEM\n";
-$choi = readline("Enter your choice: ");
+echo "4. CHANGE TASK STATUS (Completed/Not Completed)\n";
 
+$choi = readline("Enter your choice: ");
 
 if ($choi == 1) {
     $object->createList();
-
 } elseif ($choi == 2) {
-
     $object->deleteList();
-
-    echo "After deleting the list is\n";
-    
+    echo "After deleting, the list is:\n";
     $object->viewToDo();
-
 } elseif ($choi == 3) {
-
     $object->updateList();
+} elseif ($choi == 4) {
+    $object->markCompleted();
 } else {
-
     echo "Invalid choice.\n";
 }
- echo "The list is::\n";
-        $object->viewToDo();
 
+echo "Final To-Do List:\n";
+$object->viewToDo();

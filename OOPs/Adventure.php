@@ -21,7 +21,7 @@ class UtopiaGame {
         }
     }
 
-    private function greetPlayer() {
+    public function greetPlayer() {
         echo "\t\t____WELCOME TO THE WORLD OF UTOPIA____\n";
         $this->player = readline("Enter the name of the player:\n");
         echo "HELLO '{$this->player}', WELCOME TO THE WORLD OF UTOPIA\n";
@@ -29,12 +29,12 @@ class UtopiaGame {
         echo "\t\t\t\t!!! LET'S BEGIN !!!\n\n";
     }
 
-    private function showMainMenu() {
+    public function showMainMenu() {
         echo "1. FOREST HUNT\n";
         echo "2. MAKE A WISH\n";
     }
 
-    private function forestHunt() {
+    public function forestHunt() {
         echo "GREAT CHOICE!\n";
         echo "\t\t{$this->player}, WELCOME TO FOREST HUNT\n";
         echo "** FOREST HUNT is a simple game where you have to find the right path to escape the PANANONA FOREST **\n";
@@ -55,7 +55,7 @@ class UtopiaGame {
         }
     }
 
-    private function tigerEncounter() {
+    public function tigerEncounter() {
         echo "You chose to go LEFT...\n";
         echo "(A few minutes later...) Oh no! {$this->player}, there's a tiger! What do you do?\n";
         echo "1. RUN\n";
@@ -72,7 +72,7 @@ class UtopiaGame {
         }
     }
 
-    private function runFromTiger() {
+    public function runFromTiger() {
         echo "RUN {$this->player}, RUN!!!!!!!!!!!\n";
         echo "DO YOU WANT TO RUN TO THE NORTH OR TO THE EAST?\n";
         $run = readline("1. NORTH\n2. EAST\n");
@@ -88,7 +88,7 @@ class UtopiaGame {
         }
     }
 
-    private function askToContinue() {
+    public function askToContinue() {
         $ch1 = readline("Do you want to continue? (y/n): ");
         if (strtolower($ch1) != 'y') {
             echo "Goodbye {$this->player}!\n";
@@ -96,7 +96,7 @@ class UtopiaGame {
         }
     }
 
-    private function makeAWish() {
+    public function makeAWish() {
         echo "{$this->player}, Let's play MAKE A WISH\n";
         echo "You have 3 chances to guess the correct number(1-100).\n";
         echo "If you guess correctly, your wish will come true!\n";

@@ -32,10 +32,21 @@
                 echo "\n";
             }
         }
+
+        public function maximumTotal(){
+
+            for ($i = $this->row - 2; $i >= 0; $i--) {
+                for ($j = 0; $j <= $i; $j++) {
+                    $this->numberArray[$i][$j] += max($this->numberArray[$i + 1][$j], $this->numberArray[$i + 1][$j + 1]);
+                }
+                //echo "MAXIMUM PATH SUM : ".$this->numberArray[0][0];
+            } 
+            echo "MAXIMUM PATH SUM : ".$this->numberArray[0][0];  
+        }
     }
     $object = new NumberTower();
     $object->getNumber();
     echo "----------------------------\n";
     $object->display();
 
-    
+    $object->maximumTotal();

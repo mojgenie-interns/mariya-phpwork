@@ -46,7 +46,7 @@
 
             public function gridMove(){
 
-                $input = readline( "Enter the index and Number (0,2):\n ");
+                $input = readline( "Enter the index and Number eg :(0,2):\n ");
                 list($index , $number ) = explode(",",$input);
                 $index = (int)$index;
                 $number = (int)$number;

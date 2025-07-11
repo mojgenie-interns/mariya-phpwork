@@ -1,0 +1,12 @@
+[
+    {
+        "item": "PEN",
+        "quantities": "5",
+        "cost": "10"
+    },
+    {
+        "item": "Water",
+        "quantities": "1",
+        "cost": "10"
+    }
+]

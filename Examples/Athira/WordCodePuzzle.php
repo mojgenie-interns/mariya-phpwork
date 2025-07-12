@@ -2,6 +2,6 @@
 
 class WordPuzzle{
 
-
+    public $missing =[];
     
 }

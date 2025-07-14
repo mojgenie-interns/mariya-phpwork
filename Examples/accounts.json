@@ -3,5 +3,10 @@
         "name": "mariya",
         "account_number": "ACC000001",
         "balance": 499600
+    },
+    {
+        "name": "nikhitha",
+        "account_number": "ACC000002",
+        "balance": 0
     }
 ]

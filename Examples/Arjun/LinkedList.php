@@ -120,7 +120,7 @@ while (true) {
             exit;
 
         default:
-            echo "Invalid choice.\n";
+            echo "Invalid choice...\n";
     }
 }
 

@@ -1,0 +1,29 @@
+body {
+    background-color: rgb(235, 181, 181);
+}
+
+@media (max-width: 1250px) {
+    body {
+        background-color: rgb(62, 29, 35) !important;
+    }
+
+}
+
+.flex-container {
+    display: flex;
+    background-color: white;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    padding: 10px;
+    border: 1px;
+    width: 100%;
+
+}
+
+a {
+    text-decoration: none;
+
+}

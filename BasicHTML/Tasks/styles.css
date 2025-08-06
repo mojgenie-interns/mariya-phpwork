@@ -6,15 +6,25 @@ body {
     body {
         background-color: rgb(62, 29, 35) !important;
     }
+    nav{
+        display: none;
+    }
+   .icon{
+    display: block !important;
+}
 
 }
+.icon{
+    display: none;
+}
+ 
 
 .flex-container {
     display: flex;
     background-color: white;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
+    align-items: flex-end;
     font-family: 'Times New Roman', Times, serif;
     font-size: 20px;
     padding: 10px;

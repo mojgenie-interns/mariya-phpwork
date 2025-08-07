@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CALCULATOR</title>
+    </head>
+    <style>
+        body{
+            align-items: center;
+        }
+        form{
+            align-items: flex-end;
+            
+        }
+        .flex-container{
+            display: flex;
+            flex-direction: column;
+            background-color: rgb(245, 243, 241);
+            border: 1px;
+            align-items: center;
+            width: 600px;
+            height: 350px;
+
+        }
+        .flex-container > div{
+            background-color: aquamarine;
+            flex-direction: column;
+            align-items: center;
+        }
+        .button{
+            background-color:rgb(80, 8, 8);
+            border: none;
+            color: white;
+        }
+    </style>
+    <body>
+        <script>
+            let digit1 = parseInt(document.getElementById("number1").value);
+            let digit2 = parseInt(document.getElementById("number2").value);
+            console.log(digit2);
+            let opp = document.getElementById("operation");
+            function calculateCalculator(){
+                switch(opp){
+                    case "add":
+                        result = digit1 + digit2;
+                        break;
+                    case "sub":
+                        result = digit1 - digit2;
+                        break;
+                    
+                }
+                document.getElementById("result").textContent = result;
+            } 
+         </script>        
+            
+        <div style="display: flex;align-items: center;">
+            <div class="flex-container">
+            <h1>CALCULATOR</h1>
+        
+        <div><form style="display: flex; flex-direction: column; gap: 14px;">
+            <div><label for ="number1" >Enter the first number</label>
+            <input type="number" id="number1" value=""></div>
+           <div> <label for ="number2">Enter the second number</label>
+            <input type="number" id="number2" value=""></div>
+            <div><label for="operation">Choose the operation</label>
+            <select name="operation" id="operation">
+                <option value="add">+</option> 
+                <option value="sub">-</option>
+                <option value="multi">*</option>
+                <option value="divi">/</option>
+                <option value="modulo">%</option>
+            </select></div>
+            <div><button class="button" onclick="calculateCalculator()">find</button></div>
+            <h2 id="result">Result</h2>
+        </form></div></div></div> 
+    </body>
+</html>

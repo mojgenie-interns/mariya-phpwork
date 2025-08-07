@@ -1,0 +1,33 @@
+<!DOCTYPE html><html>
+    <head>
+        <link rel="stylesheet" href="Counter.css">
+        <title>SIMPLE COUNTER APP</title>
+    </head>
+    <body>
+        <script>
+            let count = 0;
+            function decrement(){
+                if(count != 0){
+                    count--;
+                    document.getElementById("less").textContent = count;
+                }else{
+                    alert("can't reduce")
+                }
+
+            }
+            function increment(){
+                count++;
+                document.getElementById("less").textContent = count;
+            }
+        </script>
+       
+        <h1>COUNTER</h1>
+        <p id = "less">0</p>
+        <div style="display: flex;">
+        <div class="flex-container" >
+         <div class = "item"> <button class="button" onclick="increment()" >+</button></div>
+         <div class="item"><button class="button" onclick="decrement()" >-</button></div>
+        </div> 
+        </div>
+    </body>
+</html>

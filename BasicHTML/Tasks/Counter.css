@@ -1,0 +1,33 @@
+h1{
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+}
+body{
+    background-color: black;
+     align-items: center;
+    justify-items: center;
+}
+.button {
+  background-color:white;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  align-items: center;
+  justify-items: center;
+}
+p{
+    font-size: 40px;
+    color: aqua;
+}
+.flex-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+ 
